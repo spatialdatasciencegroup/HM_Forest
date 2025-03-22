@@ -67,7 +67,7 @@ TC1_Prediction_HMTFIST_Unetv2_Viterbi.tif       #Output prediction file
 TC1_Prediction_HMTFIST_Unetv2_Viterbi.txt
 TC1                                             #Test case name
 ```
-We also need to create a `parameters.txt` to config the following parameters:
+We also need to create a `2_parameter.txt` to config the following parameters:
 ```plaintext
 2                   #Test case ID
 0.001               #Epsilon
