@@ -12,7 +12,7 @@ HM_Forest/
     └── Input/
         └── Reach_2/
             ├── 2_parameter.txt                  # Parameter configuration file
-            ├── config.txt                       # Simulation configuration file
+            ├── config.txt                       # Configuration file
             ├── Reach_2.zip                      # Compressed input dataset:
             │   ├── DEM_Reach_2_2m_OPTIMALfelt.tif      # Digital Elevation Model
             │   ├── River Segment Full OPTIMAL.tif      # Segmented river stream
