@@ -946,7 +946,7 @@ void cFlood::outputRegulization(string lambda) {
 
 	idf = idf + "_" + tree_type;
 
-	classout.open(CTOutputLocation + "ranges_" + lambda + "_" + CTPredictionRegularizedTxt);
+	classout.open(CTOutputLocation + CTPredictionRegularizedTxt);
 	//classout.open(CTOutputLocation + parameter.fname + ".txt");
 
 	for (int i = 0; i < mappredictions.size(); i++) {
@@ -966,7 +966,10 @@ void cFlood::outputRegulization(string lambda) {
 		prediction[row] = new float[parameter.COLUMN];
 		for (int col = 0; col < parameter.COLUMN; col++)
 		{
-			prediction[row][col] = mappredictions[index];
+		    if(mappredictions[index] >0)
+		        prediction[row][col] = 1;
+		    else
+			    prediction[row][col] = mappredictions[index];
 			index++;
 
 		}
@@ -976,7 +979,7 @@ void cFlood::outputRegulization(string lambda) {
 	srcDataset->GetGeoTransform(geotransform);
 	const OGRSpatialReference* poSRS = srcDataset->GetSpatialRef();
 
-	GeotiffWrite finalTiff((CTOutputLocation + "ranges_" + lambda + "_" + CTPredictionRegularized).c_str(), parameter.ROW, parameter.COLUMN, 1, geotransform, poSRS);
+	GeotiffWrite finalTiff((CTOutputLocation + CTPredictionRegularized).c_str(), parameter.ROW, parameter.COLUMN, 1, geotransform, poSRS);
 	finalTiff.write(prediction);
 
 	/*for (int i = 0; i < data.reach_ids.size(); i++) {
@@ -3179,10 +3182,10 @@ void cFlood::input(int argc, char* argv[]) {
 		////auto elapsed_seconds = end - start;
 
 		////std::cout << "Inference Finished. Duration: " << elapsed_seconds.count() << endl << endl;
-		//outputRegulization(lambda_str.str());
-		////cout << "Range Value Now" << ranges[i] << endl;
-		data.regularizedMaxCostRight.clear();
-		data.regularizedMaxCostRight.resize(data.rightNodesInOrder.size(), -1);
+	outputRegulization(std::to_string(parameter.lambda));
+	////cout << "Range Value Now" << ranges[i] << endl;
+	data.regularizedMaxCostRight.clear();
+	data.regularizedMaxCostRight.resize(data.rightNodesInOrder.size(), -1);
 	
 
 }
@@ -3676,7 +3679,12 @@ void cFlood::selected_prediction_FIST() {
 		prediction[row] = new float[parameter.COLUMN];
 		for (int col = 0; col < parameter.COLUMN; col++)
 		{
-			prediction[row][col] = mappredictions[index];
+		    if(mappredictions[index]>0)
+		    {
+		        prediction[row][col] = 1;
+		    }
+		    else
+			    prediction[row][col] = mappredictions[index];
 			index++;
 		}
 	}
