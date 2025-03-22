@@ -116,6 +116,7 @@ struct sParameter {
 	string fname;
 	float cutoff_percentage=0.2;
 	float minCost = 0.5;
+	int num_range = 1000;
 	int useCutoff = 1; // Added by Saugat: parameter to decide whether to use cutoff or not in FIST
 	int useHMT = 1; // whether or not to use HMT tree (SplitTree)
 	double lambda;
