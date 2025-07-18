@@ -7,7 +7,6 @@ River Segment Full OPTIMAL.tif
 ./Data/Result/
 ./Data/Result/Reach_2/
 TC1_Prediction_HMTFIST_Unetv2.tif
-Reach_2_Left_Bank.tif
 TC1_Prediction_HMTFIST_Unetv2.txt
 TC1_Prediction_HMTFIST_Unetv2_Viterbi.tif
 TC1_Prediction_HMTFIST_Unetv2_Viterbi.txt

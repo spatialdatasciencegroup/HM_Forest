@@ -174,9 +174,9 @@ public:
 	void export_FIST_structure(string child_file, string parent_file, string small_file);
 
 	// get left and right nodes order
-	void getNodeOrder(queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited, vector<int>& left_node_order, map<int, bool>& on_queue);
+// 	void getNodeOrder(queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited, vector<int>& left_node_order, map<int, bool>& on_queue);
 	int reachBFS(queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited, vector<int>& left_node_order, map<int, bool>& on_queue); // for black nodes
-	void brokenBFS(int last_node, queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited, map<int, bool>& on_queue); // after the chain is broken
+// 	void brokenBFS(int last_node, queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited, map<int, bool>& on_queue); // after the chain is broken
 
 	// log likelihood regularization
 	void getLoglikelihood();
@@ -1840,8 +1840,8 @@ void cFlood::input(int argc, char* argv[]) {
 		CTOutputLocation = line; //oputput location to store the output of HMCT
 		getline(config, line);
 		CTPrediction = line;    //file name for output prediction data
-		getline(config, line);
-		CTLeftBank = line;
+// 		getline(config, line);
+// 		CTLeftBank = line;
 		getline(config, line);
 		CTPredictionTxt = line;
 		getline(config, line);
@@ -1987,7 +1987,7 @@ void cFlood::input(int argc, char* argv[]) {
 	//GeotiffRead TreeTiff((CTInputLocation + CTTree).c_str());
 	//GeotiffRead RoughnessTiff((CTInputLocation + CTRoughness).c_str());
 	GeotiffRead FelTiff((CTInputLocation + CTFel).c_str());
-	GeotiffRead LeftBankTiff((CTInputLocation + CTLeftBank).c_str());
+// 	GeotiffRead LeftBankTiff((CTInputLocation + CTLeftBank).c_str());
 
 	if (parameter.useHMT) {
 		cout << "using HMT tree" << endl;
@@ -2003,7 +2003,7 @@ void cFlood::input(int argc, char* argv[]) {
 	//float** roughnessData = RoughnessTiff.GetRasterBand(1);
 	float** felData = FelTiff.GetRasterBand(1);
 	float** reachData = reachTiff.GetRasterBand(1);
-	float** leftBankData = LeftBankTiff.GetRasterBand(1);
+// 	float** leftBankData = LeftBankTiff.GetRasterBand(1);
 
 	// Get the array dimensions
 	int* dims = sourceDirTiff.GetDimensions();
@@ -2086,14 +2086,14 @@ void cFlood::input(int argc, char* argv[]) {
 			bool river_node = false;
 
 			// get left bank data
-			int isLeftBankNode = leftBankData[row][col];
-			if (isLeftBankNode == -11) {
-				data.leftBankNodes.insert(make_pair(currentId, true));
-			}
-		/*	if (row == 0 || row == NROWS - 1 || col == 0 || col == NCOLS - 1)
-			{
-				sourceDir = -1;
-			}*/
+// 			int isLeftBankNode = leftBankData[row][col];
+// 			if (isLeftBankNode == -11) {
+// 				data.leftBankNodes.insert(make_pair(currentId, true));
+// 			}
+// 		/*	if (row == 0 || row == NROWS - 1 || col == 0 || col == NCOLS - 1)
+// 			{
+// 				sourceDir = -1;
+// 			}*/
 			switch (sourceDir) {
 			case 1:
 				parentId = currentId + 1;
@@ -2431,9 +2431,9 @@ void cFlood::input(int argc, char* argv[]) {
 		}
 	}
 
-	cout << "left bank nodes size: " << data.leftBankNodes.size() << endl;
+// 	cout << "left bank nodes size: " << data.leftBankNodes.size() << endl;
 
-	cout << "left bank nodes size: " << data.leftBankNodes.size() << endl;
+// 	cout << "left bank nodes size: " << data.leftBankNodes.size() << endl;
 
 	cout << "12021141 original id: " << data.allNodes[12021141]->originalId << endl;
 	cout << "12263910 original id: " << data.allNodes[12263910]->originalId << endl;
@@ -3199,18 +3199,18 @@ void cFlood::input(int argc, char* argv[]) {
 // vector<int> right_node_order;
 
 
-void cFlood::getNodeOrder(queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited, vector<int>& left_node_order, map<int, bool>& on_queue) {
-	int last_node = reachBFS(bfs_que, bfs_visited, left_node_order, on_queue);
-	brokenBFS(last_node, bfs_que, bfs_visited, on_queue);
-	if (bfs_que.empty()) {
-		return;
-	}
-	else {
-		getNodeOrder(bfs_que, bfs_visited, left_node_order, on_queue);
-	}
+// void cFlood::getNodeOrder(queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited, vector<int>& left_node_order, map<int, bool>& on_queue) {
+// 	int last_node = reachBFS(bfs_que, bfs_visited, left_node_order, on_queue);
+// // 	brokenBFS(last_node, bfs_que, bfs_visited, on_queue);
+// 	if (bfs_que.empty()) {
+// 		return;
+// 	}
+// 	else {
+// 		getNodeOrder(bfs_que, bfs_visited, left_node_order, on_queue);
+// 	}
 
-	return;
-}
+// 	return;
+// }
 
 int cFlood::reachBFS(queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited, vector<int>& left_node_order, map<int, bool>& on_queue) {
 	int last_node;
@@ -3248,9 +3248,9 @@ int cFlood::reachBFS(queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited
 				int neigh_node_id = i_nei * parameter.COLUMN + j_nei;
 
 				// skip nodes not on left side
-				if (!data.leftBankNodes[neigh_node_id]) {
-					continue;
-				}
+				// if (!data.leftBankNodes[neigh_node_id]) {
+				// 	continue;
+				// }
 
 				if (bfs_visited[neigh_node_id]) {
 					continue;
@@ -3267,51 +3267,51 @@ int cFlood::reachBFS(queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited
 	return last_node;
 }
 
-void cFlood::brokenBFS(int next_node, queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited, map<int, bool>& on_queue) {
-	// after the chain is broken
-	int idx = next_node;
-	cout << "next: " << idx << endl;
-	int i = (int)(next_node / parameter.COLUMN);
-	int j = next_node % parameter.COLUMN;
+// void cFlood::brokenBFS(int next_node, queue<pair<int, int>>& bfs_que, map<int, bool>& bfs_visited, map<int, bool>& on_queue) {
+// 	// after the chain is broken
+// 	int idx = next_node;
+// 	cout << "next: " << idx << endl;
+// 	int i = (int)(next_node / parameter.COLUMN);
+// 	int j = next_node % parameter.COLUMN;
 
-	for (int l = -1; l < 2; l++) {
-		for (int r = -1; r < 2; r++) {
-			if (l == 0 && r == 0) {
-				continue;
-			}
+// 	for (int l = -1; l < 2; l++) {
+// 		for (int r = -1; r < 2; r++) {
+// 			if (l == 0 && r == 0) {
+// 				continue;
+// 			}
 
-			int i_nei, j_nei = (i + l, j + r); // get the neighboring x and y
+// 			int i_nei, j_nei = (i + l, j + r); // get the neighboring x and y
 
-			// check for boundary cases
-			if (i_nei < 0 || j_nei < 0 || j_nei >= parameter.COLUMN || i_nei >= parameter.ROW) {
-				continue;
-			}
+// 			// check for boundary cases
+// 			if (i_nei < 0 || j_nei < 0 || j_nei >= parameter.COLUMN || i_nei >= parameter.ROW) {
+// 				continue;
+// 			}
 
-			// check if already visited or not
-			int neigh_node_id = i_nei * parameter.COLUMN + j_nei;
+// 			// check if already visited or not
+// 			int neigh_node_id = i_nei * parameter.COLUMN + j_nei;
 
-			// 			cout << "here1: " << neigh_node_id << endl;
+// 			// 			cout << "here1: " << neigh_node_id << endl;
 
-						// skip nodes not on left side
-			if (!data.leftBankNodes[neigh_node_id]) {
-				continue;
-			}
+// 						// skip nodes not on left side
+// // 			if (!data.leftBankNodes[neigh_node_id]) {
+// // 				continue;
+// // 			}
 
-			// 			cout << "here2: " << neigh_node_id << endl;
+// 			// 			cout << "here2: " << neigh_node_id << endl;
 
-			if (bfs_visited[neigh_node_id]) {
-				continue;
-			}
+// 			if (bfs_visited[neigh_node_id]) {
+// 				continue;
+// 			}
 
-			// 			cout << "here3: " << neigh_node_id << endl;
+// 			// 			cout << "here3: " << neigh_node_id << endl;
 
-			if ((data.reach_ids_orig_map[neigh_node_id] || data.river_ids_map[neigh_node_id]) && (!on_queue[neigh_node_id])) {
-				bfs_que.push(make_pair(i_nei, j_nei));
-				on_queue.insert(make_pair(neigh_node_id, true));
-			}
-		}
-	}
-}
+// 			if ((data.reach_ids_orig_map[neigh_node_id] || data.river_ids_map[neigh_node_id]) && (!on_queue[neigh_node_id])) {
+// 				bfs_que.push(make_pair(i_nei, j_nei));
+// 				on_queue.insert(make_pair(neigh_node_id, true));
+// 			}
+// 		}
+// 	}
+// }
 
 
 

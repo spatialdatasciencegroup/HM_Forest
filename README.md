@@ -60,11 +60,10 @@ DEM_Reach_2_2m_OPTIMALfel.tif                   #Input elevation file
 River Segment Full OPTIMAL.tif                  #Input segmented river stream file
 ./Data/Result/                                  #Output folder
 ./Data/Result/Reach_2/                          #Output location for a test case
-TC1_Prediction_HMTFIST_Unetv2.tif       
-Reach_2_Left_Bank.tif                           #Input bank point
-TC1_Prediction_HMTFIST_Unetv2.txt
-TC1_Prediction_HMTFIST_Unetv2_Viterbi.tif       #Output prediction file
-TC1_Prediction_HMTFIST_Unetv2_Viterbi.txt
+TC1_Prediction_HMTFIST_Unetv2.tif               #Output prediction file without regularization
+TC1_Prediction_HMTFIST_Unetv2.txt               #Output as list
+TC1_Prediction_HMTFIST_Unetv2_Viterbi.tif       #Output prediction file with regularization
+TC1_Prediction_HMTFIST_Unetv2_Viterbi.txt       #Output as list
 TC1                                             #Test case name
 ```
 We also need to create a `2_parameter.txt` to config the following parameters:
