@@ -39,6 +39,7 @@ conda install -c conda-forge/label/cf202003 gdal
 
 **Compile the code**
 ```shell
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/ENVIRONMENT/PATH/HMF/lib
 g++ -std=c++11 -lgdal -I /ENVIRONMENT/PATH/HMF/include -L /ENVIRONMENT/PATH/HMF/lib HMFFIST.cpp GeotiffRead.cpp GeotiffWrite.cpp -O3 -o HMFFIST
 ```
 
