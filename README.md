@@ -18,6 +18,7 @@ HM_Forest/
             │   ├── River Segment Full OPTIMAL.tif      # Segmented river stream
             │   ├── src_dir_Reach_2.tif                 # Flow direction raster
             │   ├── Unet_Reach_2_v2.tif                 # Flood probability map (UNet output)
+            │   ├── Reach_2.tif                         # Original image
             │   └── Reach_2_Left_Bank.tif               # River bank mask
 ```
 
